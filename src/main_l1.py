@@ -16,7 +16,7 @@ import asyncio
 import time
 from datetime import datetime
 
-from event_handler import EventHandler
+from src.openai_batch_sdk.event_handler import EventHandler
 from utils.env import load_environment
 from utils.logging import logger, setup_logging
 from utils.project import get_project_root
@@ -24,7 +24,7 @@ from utils.project import get_project_root
 from jsonl_handler import create_json_line, write_jsonl_file
 from gpt_conversation_handler import Role, create_message
 
-from core_batch_processor import (init_monitoring, retrieve_batches_results_handler, retrieve_batches_results, graceful_shutdown)
+from src.openai_batch_sdk.core import (init_monitoring, retrieve_batches_results_handler, retrieve_batches_results, graceful_shutdown)
 
 async def shutdown(signal, loop, executor):
     print(f"\nReceived exit signal {signal.name}...")

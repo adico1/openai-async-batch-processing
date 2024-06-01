@@ -1,5 +1,5 @@
 from .advanced_batch_processor import init_monitoring
-from .event_handler import EventHandler
+from .openai_batch_sdk.event_handler import EventHandler
 from .notifier import send_notification
 from .result_handler import retrieve_batch_results
 

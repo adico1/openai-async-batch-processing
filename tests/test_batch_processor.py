@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 from src.advanced_batch_processor import init_monitoring
-from src.event_handler import EventHandler
+from src.openai_batch_sdk.event_handler import EventHandler
 
 
 class TestBatchProcessor(unittest.TestCase):

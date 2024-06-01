@@ -14,14 +14,14 @@ from deps.oai.batch_api.batch_api import (check_batch_status,
                                           retrieve_batch_result,
                                           retrieve_batches_results,
                                           submit_batch_job)
-from event_handler import EventHandler
+from src.openai_batch_sdk.event_handler import EventHandler
 from gpt_conversation_handler import Role, create_message
 from jsonl_handler import create_json_line, write_jsonl_file
 from utils.env import load_environment
 from utils.logging import logger, setup_logging
 from utils.project import get_project_root
 
-from .core_batch_processor import (check_batches_results, gen_submit_batch_job,
+from .openai_batch_sdk.core import (check_batches_results, gen_submit_batch_job,
                                    init_monitoring,
                                    retrieve_batches_results_handler)
 

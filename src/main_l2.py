@@ -19,7 +19,7 @@ from datetime import datetime
 from deps.oai.batch_api.batch_api import (check_batch_status,
                                              retrieve_batch_result,
                                              submit_batch_job)
-from event_handler import EventHandler
+from src.openai_batch_sdk.event_handler import EventHandler
 from utils.env import load_environment
 from utils.logging import logger, setup_logging
 from utils.project import get_project_root
