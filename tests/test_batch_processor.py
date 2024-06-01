@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 # Ensure the src directory is in the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from src.batch_processor import init_monitoring
+from src.advanced_batch_processor import init_monitoring
 from src.event_handler import EventHandler
 
 

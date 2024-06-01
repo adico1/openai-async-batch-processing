@@ -7,9 +7,15 @@ setup(
     package_dir={"": "src"},
     install_requires=[
         "openai",
+        "python-dotenv",
     ],
-    author="Your Name",
-    author_email="your.email@example.com",
+    entry_points={
+        'console_scripts': [
+            'batch_processor = batch_processor.main_l1:main',
+        ],
+    },
+    author="adico",
+    author_email="adico1[at]gamil.com",
     description="A library to manage OpenAI ChatGPT batch jobs asynchronously.",
-    url="https://github.com/yourusername/openai_batch_sdk",
+    url="https://github.com/adico1/openai_batch_sdk",
 )
