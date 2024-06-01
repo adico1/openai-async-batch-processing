@@ -15,7 +15,15 @@ setup(
         ],
     },
     author="adico",
-    author_email="adico1[at]gamil.com",
-    description="A library to manage OpenAI ChatGPT batch jobs asynchronously.",
+    author_email="adico1@gamil.com",
+    description="An SDK for OpenAI ChatGPT batch API for a single process.",
+    long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
     url="https://github.com/adico1/openai_batch_sdk",
+    classifiers=[
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
 )
