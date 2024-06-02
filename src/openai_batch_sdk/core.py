@@ -56,9 +56,8 @@ async def retrieve_batches_results(result_file_id):
 async def retrieve_batches_results_handler(batch_completed_event):
   """Retrieves results for completed batch jobs."""
   batch_id = batch_completed_event['batch_id']
-  result_file_id = batch_completed_event['result_file_id']
-  p_logger.info(f"Starting Retrieve Result Process of batch: {batch_id}.")
-  return retrieve_batches_results(result_file_id)
+  p_logger.debug(f"Starting Retrieve Result Process of batch: {batch_id}.")
+  return batch_completed_event['response']
 
 # ==============================================================================
 # Batch Job Status Check

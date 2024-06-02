@@ -120,7 +120,7 @@ async def main():
   event_handler = EventHandler()
   event_handler.register_event(
     "batch_processing_completed",
-    lambda event: asyncio.create_task(retrieve_batches_results_handler(event, event_handler))
+    lambda event: asyncio.create_task(retrieve_batches_results_handler(event))
   )
   add_batch_job = init_monitoring(event_handler)
 
