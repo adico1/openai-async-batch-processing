@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'batch_processor = batch_processor.main_l1:main',
+            'batch_processor = scripts.main:main',
         ],
     },
     author="adico",
@@ -26,4 +26,5 @@ setup(
     "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    test_suite='tests',
 )

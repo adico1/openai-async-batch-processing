@@ -2,7 +2,7 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 import json
 from typing import List
-from gpt_conversation_handler import Role, GPTMessage, create_message, create_conversation
+from src.utils.gpt_conversation_handler import Role, GPTMessage, create_message, create_conversation
 
 def create_json_line(
   custom_id: str,

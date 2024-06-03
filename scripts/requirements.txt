@@ -1,0 +1,2 @@
+openai-batch-sdk
+python-dotenv

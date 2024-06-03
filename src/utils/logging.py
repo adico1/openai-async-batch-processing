@@ -94,8 +94,8 @@ def setup_logging():
             return self.feature_name in record.msg
 
     # Example: Enabling logs for ad generation feature
-    if 'AD_PROCESSING' in os.getenv('LOG_FEATURES', ''):
-        ad_processing_filter = FeatureFilter('AD_PROCESSING')
+    if 'FEATURE' in os.getenv('LOG_FEATURES', ''):
+        ad_processing_filter = FeatureFilter('FEATURE')
         console_handler.addFilter(ad_processing_filter)
         file_handler.addFilter(ad_processing_filter)
 
