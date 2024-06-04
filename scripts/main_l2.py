@@ -14,13 +14,13 @@ import asyncio
 import env_loader  # pylint: disable=unused-import
 from init_server import test_script, run_main
 
-from src.openai_batch_sdk.advanced import (
+from openai_batch_sdk import (
     graceful_shutdown_l2,
     init_monitoring_l2,
     retrieve_batches_results_handler_l2,
     setup_signal_handlers_l2,
+    EventHandler,
 )
-from src.openai_batch_sdk.event_handler import EventHandler
 
 
 # ==============================================================================

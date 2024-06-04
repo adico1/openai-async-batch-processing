@@ -17,8 +17,8 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
-        "openai",
-        "python-dotenv",
+        "openai==1.30.5",
+        "python-dotenv==1.0.1",
     ],
     entry_points={
         "console_scripts": [
@@ -26,7 +26,7 @@ setup(
         ],
     },
     author="adico",
-    author_email="adico1@gamil.com",
+    author_email="adico1@gmail.com",  # Ensure email is correct
     description="An SDK for OpenAI ChatGPT batch API for a single process.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -38,4 +38,10 @@ setup(
     ],
     python_requires=">=3.6",
     test_suite="tests",
+    keywords="openai sdk batch api",
+    project_urls={
+        "Documentation": "https://github.com/adico1/openai_batch_sdk#readme",
+        "Source": "https://github.com/adico1/openai_batch_sdk",
+        "Tracker": "https://github.com/adico1/openai_batch_sdk/issues",
+    },
 )

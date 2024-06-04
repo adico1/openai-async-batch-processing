@@ -18,9 +18,9 @@ Public Exports:
 import asyncio
 
 from deps.oai.batch_api.batch_api import retrieve_batch_result
-from src.openai_batch_sdk.event_handler import EventHandler
 from utils.env import load_environment
 from utils.logging import logger
+from .event_handler import EventHandler
 
 from .core import graceful_shutdown, init_monitoring, setup_signal_handlers
 
@@ -49,7 +49,12 @@ async def retrieve_batches_results_v2(result_file_id):
     Returns:
         bytes: The content of the result file.
     """
-    return retrieve_batch_result(result_file_id)
+    result_file = retrieve_batch_result(result_file_id)
+    content = result_file.read()
+    p_logger.debug("content", content)
+    lines = content.decode().splitlines()
+    p_logger.debug("lines", lines)
+    return lines
 
 
 async def retrieve_batches_results_handler_l2(batch_completed_event, event_handler):
@@ -64,26 +69,39 @@ async def retrieve_batches_results_handler_l2(batch_completed_event, event_handl
     batch_id = batch_completed_event["batch_id"]
     if batch_completed_event["status"] == "response_ready":
         response = batch_completed_event["response"]
+        completed = response["completed"]
+        failed = response["failed"]
+        errors = [f"{error.code}: {error.message}" for error in response["errors"]]
         result_file_id = response["result_file_id"]
         p_logger.info("Starting Retrieve Result Process.")
-        result_file = retrieve_batch_result(result_file_id)
-        content = result_file.read()
-        p_logger.debug("content", content)
-        lines = content.decode().splitlines()
+        lines = retrieve_batches_results_v2(result_file_id)
         p_logger.debug("lines", lines)
-        event_handler.trigger_event("batch_processing_completed", batch_completed_event)
+        batch_completed_event_l2 = {
+            "batch_id": batch_id,
+            "status": "completed",
+            "response": lines,
+            "completed": completed,
+            "failed": failed,
+            "errors": errors,
+        }
+        event_handler.trigger_event("batch_completed", batch_completed_event_l2)
     else:
-        completed = batch_completed_event["completed"]
-        failed = batch_completed_event["failed"]
-        errors = [
-            f"{error.code}: {error.message}"
-            for error in batch_completed_event["errors"]
-        ]
+        response = batch_completed_event["response"]
+        completed = response["completed"]
+        failed = response["failed"]
+        errors = [f"{error.code}: {error.message}" for error in response["errors"]]
         p_logger.error(
             f"Batch {batch_id} processing status: "
             f"completed: {completed}, failed: {failed}, errors: {errors}."
         )
-        event_handler.trigger_event("batch_processing_completed", batch_completed_event)
+        batch_completed_event_l2 = {
+            "batch_id": batch_id,
+            "status": "failed",
+            "completed": completed,
+            "failed": failed,
+            "errors": errors,
+        }
+        event_handler.trigger_event("batch_completed", batch_completed_event)
 
 
 def init_monitoring_l2(app_event_handler):
@@ -97,7 +115,7 @@ def init_monitoring_l2(app_event_handler):
         function: A function to add batch jobs given a file path.
     """
     core_event_handler = EventHandler()
-    app_event_handler.register_event(
+    core_event_handler.register_event(
         "batch_processing_completed",
         lambda event: asyncio.create_task(
             retrieve_batches_results_handler_l2(event, app_event_handler)
