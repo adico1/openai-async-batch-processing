@@ -5,7 +5,6 @@ Business
 1.7 after retrieval, according to user config, the data cannot be retrieved twice, all files will be deleted to remove garbage from openai
 2. output retrieved jsonl to valid interface
 3. batch result interface
-4. graceful async shutdown
 5. test - multiple batches
 6. expired batch,
 7. partially batch processed
@@ -21,4 +20,3 @@ Tech Debt
 6. unit tests
 7. documentations
 8. fix diagram
-
